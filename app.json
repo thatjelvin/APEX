@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "AthleteForge",
+    "slug": "athleteforge",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0D1117"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.athleteforge.app",
+      "buildNumber": "1.0.0",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "fetch",
+          "remote-notification"
+        ]
+      }
+    },
+    "android": {
+      "package": "com.athleteforge.android",
+      "versionCode": 1,
+      "adaptiveIcon": { "backgroundColor": "#0D1117" },
+      "permissions": [
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE",
+        "WAKE_LOCK"
+      ]
+    },
+    "web": {},
+    "plugins": [
+      "expo-notifications",
+      "expo-av"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "athleteforge-project"
+      }
+    },
+    "scheme": "athleteforge"
+  }
+}
