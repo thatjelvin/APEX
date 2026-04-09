@@ -2,7 +2,6 @@ import React, { useMemo, useState } from "react";
 import { Alert } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { PlaceholderScreen } from "@/screens/common/PlaceholderScreen";
 import { useOnboardingStore } from "@/store/onboardingStore";
 import { SplashScreen } from "@/screens/onboarding/SplashScreen";
 import { WelcomeScreen } from "@/screens/onboarding/WelcomeScreen";
@@ -14,11 +13,19 @@ import { AuthScreen } from "@/screens/onboarding/AuthScreen";
 import { basketballPositions, footballPositions, pillars } from "@/constants/onboarding";
 import { persistOnboardingData } from "@/services/profile";
 import { useAuthStore } from "@/store/authStore";
+import { HomeScreen } from "@/screens/home/HomeScreen";
+import { TrainingScreen } from "@/screens/training/TrainingScreen";
+import { ExerciseLibraryScreen } from "@/screens/exercises/ExerciseLibraryScreen";
+import { ProgressScreen } from "@/screens/progress/ProgressScreen";
+import { ProfileScreen } from "@/screens/profile/ProfileScreen";
+import { WorkoutSessionScreen } from "@/screens/workout/WorkoutSessionScreen";
+import { ExerciseDetailScreen } from "@/screens/exercises/ExerciseDetailScreen";
 
 type RootStackParamList = {
   Onboarding: undefined;
   Main: undefined;
   WorkoutSession: undefined;
+  ExerciseDetail: { exerciseId: string };
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -34,11 +41,11 @@ function MainTabs() {
         tabBarInactiveTintColor: "#888888"
       }}
     >
-      <Tab.Screen name="Home" children={() => <PlaceholderScreen title="HomeScreen" />} />
-      <Tab.Screen name="Training" children={() => <PlaceholderScreen title="TrainingScreen" />} />
-      <Tab.Screen name="Library" children={() => <PlaceholderScreen title="ExerciseLibraryScreen" />} />
-      <Tab.Screen name="Progress" children={() => <PlaceholderScreen title="ProgressScreen" />} />
-      <Tab.Screen name="Profile" children={() => <PlaceholderScreen title="ProfileScreen" />} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Training" component={TrainingScreen} />
+      <Tab.Screen name="Library" component={ExerciseLibraryScreen} />
+      <Tab.Screen name="Progress" component={ProgressScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }
@@ -145,9 +152,10 @@ export default function AppNavigator() {
       ) : (
         <RootStack.Screen name="Main" component={MainTabs} />
       )}
+      <RootStack.Screen name="WorkoutSession" component={WorkoutSessionScreen} />
       <RootStack.Screen
-        name="WorkoutSession"
-        children={() => <PlaceholderScreen title="WorkoutSessionScreen" />}
+        name="ExerciseDetail"
+        children={({ route }) => <ExerciseDetailScreen exerciseId={(route as any).params?.exerciseId ?? "box-jumps"} />}
       />
     </RootStack.Navigator>
   );
