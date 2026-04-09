@@ -37,7 +37,7 @@ create table if not exists public.exercises (
 
 create table if not exists public.programs (
   id uuid primary key default gen_random_uuid(),
-  name text not null,
+  name text not null unique,
   sport text not null,
   pillar_focus text not null,
   duration_weeks int not null,
