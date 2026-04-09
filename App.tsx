@@ -8,6 +8,9 @@ import { supabase } from './src/utils/supabase';
 import { useAuthStore } from './src/store/authStore';
 import AppNavigator from './src/navigation/AppNavigator';
 import './src/styles/global.css';
+import { initMonitoring } from './src/services/monitoring';
+
+initMonitoring();
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +31,7 @@ export default function App() {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [setSession, setUser]);
 
   if (isLoading) {
     return (
